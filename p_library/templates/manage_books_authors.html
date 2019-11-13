@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Manage books and authors{% endblock %}
+{% block main_content %}
+
+    <form method="post">
+        {{author_formset.management_form}}
+        {{book_formset.management_form}}
+        {% csrf_token %}
+        {% for form in author_formset %}
+            {{form.as_ul}} <br>
+        {% endfor %}
+
+        {% for form in book_formset %}
+            {{form.as_ul}}
+        {% endfor %}
+        <input type="submit" value="Save">
+    </form>
+
+{% endblock %}

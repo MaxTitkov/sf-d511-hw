@@ -1,0 +1,44 @@
+Добро пожаловать в {{ title }}.  <br>
+Тут собрано {{ books|length }} книг из моей личной коллекции. <br>
+
+<table border="1">
+        <thead>
+            <tr>
+                <th>"Индекс"</th>
+                <th>"ISBN"</th>
+                <th>"Количество"</th>
+                <th>"Название"</th>
+                <th>"Дата публикации"</th>
+                <th>"Автор"</th>
+                <th>"Страна"</th>
+                <th>"Краткое описаниеЭ</th>
+                <th>"Цена"</th>
+            </tr>
+        </thead>
+    {% for book in books %}
+        
+        <tbody>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{book.ISBN}}</td>
+                <td>{{book.copy_count}}</td>
+                <td>{{book.title}}</td>
+                <td>{{ book.year_release }}</td>
+                <td>{{ book.author.full_name }}</td>
+                <td>{{ book.author.country }}</td>
+                <td>{{book.description}}</td>
+                <td>{{book.price}} руб.</td>
+                <td>
+                    <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{book.id}}">
+                        <input type="submit" value="Увеличить количество">
+                    </form>
+                    <form action="/index/book_decrement/" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{book.id}}">
+                        <input type="submit" value="Уменьшить количество">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    {% endfor %}
+</table>

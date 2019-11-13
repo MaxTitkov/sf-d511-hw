@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Список книг{% endblock %}
+{% block main_content %}
+
+        <h1 class="display-4">Список книг</h1>
+        <ul class="list-group  list-group-flush">
+            {% for book in books %}
+                <ul class="list-group"><h1 class="h4 text-left font-weight-bold mt-5">{{book.title}}</h1>
+                <li class="list-group-item">
+                    <p class="font-italic">{{book.author}}</p> 
+                    <p class="font-weight-light">{{book.description|truncatechars:200}}</p>
+                {% if book.friend %}
+                <p>Имя друга, которому передал: <span class="badge badge-secondary">{{book.friend}}</span></p>
+                {% endif %}
+                <a class='btn btn-primary' href="{% url 'p_library:book_update_view' book.id %}">Изменить книгу</a>
+                </ul>
+                
+            {% endfor %}
+        </ul>
+   
+
+
+{% endblock %}

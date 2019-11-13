@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+        <h1 class="display-4">Список литературы</h1>
+        <ul class="list-group  list-group-flush">
+            {% for redaction in redactions %}
+                <ul class="list-group"><h1 class="h4 text-left font-weight-bold mt-5">{{redaction}}</h1></ul>
+                {% for book in redaction.book_set.all %}
+                    <li class="list-group-item list-group-item-action ml-3" >
+                        <p class="font-weight-bold">{{book}}</p> <p class="font-italic">{{book.author}}</p> <p class="font-weight-light">{{book.description}}</p>
+                        <span {% if book.price <= 1000.0 %}class="badge badge-secondary badge-danger"{% else %}class="badge badge-secondary"{% endif %}>
+                                {{book.price}} руб. {% if book.price <= 1000.0 %}СКИДКА!!!!{% endif %}
+                        </span> <span class="badge badge-pill badge-warning">{% if book.copy_count == 2 %}Осталось всего {{book.copy_count}} книги {% elif book.copy_count == 1 %}Осталась всего {{book.copy_count}} книга!!! {% endif %}</span></li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+   
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Список авторов {% endblock %}
+{% block main_content %}
+
+    <ul>
+        {% for author in object_list %}
+            <li>{{author.full_name}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
